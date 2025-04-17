@@ -698,6 +698,8 @@ RUN --mount=type=cache,dst=/var/cache \
         dnf5 -y remove \
             malcontent-control && \
     ; else \
+        dnf5 -y remove \
+            power-profiles-daemon && \
         dnf5 -y install \
             sddm \
     ; fi && \
@@ -807,6 +809,7 @@ RUN --mount=type=cache,dst=/var/cache \
         systemctl disable gdm.service && \
         systemctl enable sddm.service \
     ; elif grep -q "cosmic-atomic" <<< "${BASE_IMAGE_NAME}"; then \
+        systemctl enable tuned.service && \
         systemctl disable cosmic-greeter.service && \
         systemctl enable sddm.service \
     ; fi && \

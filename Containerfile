@@ -806,7 +806,7 @@ RUN --mount=type=cache,dst=/var/cache \
     if grep -q "silverblue" <<< "${BASE_IMAGE_NAME}"; then \
         systemctl disable gdm.service && \
         systemctl enable sddm.service \
-    elif grep -q "cosmic-atomic" <<< "${BASE_IMAGE_NAME}"; then \
+    ; elif grep -q "cosmic-atomic" <<< "${BASE_IMAGE_NAME}"; then \
         systemctl disable cosmic-greeter.service && \
         systemctl enable sddm.service \
     ; fi && \

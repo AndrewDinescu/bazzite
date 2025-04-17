@@ -604,6 +604,9 @@ RUN --mount=type=cache,dst=/var/cache \
     sed -i 's|#default.clock.allowed-rates = \[ 48000 \]|default.clock.allowed-rates = [ 44100 48000 ]|' /usr/share/pipewire/pipewire.conf && \
     sed -i 's|^ExecStart=.*|ExecStart=/usr/libexec/rtkit-daemon --no-canary|' /usr/lib/systemd/system/rtkit-daemon.service && \
     if grep -q "cosmic-atomic" <<< "${BASE_IMAGE_NAME}"; then \
+      dnf5 -y swap
+          power-profiles-daemon \
+          tuned-ppd && \
       systemctl enable tuned.service \
     ; fi && \
     sed -i 's/balanced=balanced$/balanced=balanced-bazzite/' /etc/tuned/ppd.conf && \
@@ -701,8 +704,6 @@ RUN --mount=type=cache,dst=/var/cache \
         dnf5 -y remove \
             malcontent-control && \
     ; else \
-        dnf5 -y remove \
-            power-profiles-daemon && \
         dnf5 -y install \
             sddm \
     ; fi && \

@@ -7,6 +7,8 @@ _install-system-flatpaks:
     BASE_IMAGE_NAME=$(jq -r '."base-image-name"' < $IMAGE_INFO)
     if [[ ${BASE_IMAGE_NAME} == 'silverblue' ]]; then
         FLATPAKS="gnome_flatpaks/flatpaks"
+    elif [[ ${BASE_IMAGE_NAME} == 'cosmic-atomic' ]]; then
+        FLATPAKS="cosmic_flatpaks/flatpaks"
     else
         FLATPAKS="kde_flatpaks/flatpaks"
     fi

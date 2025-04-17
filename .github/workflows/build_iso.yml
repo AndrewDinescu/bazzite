@@ -28,20 +28,30 @@ jobs:
           - bazzite-gnome
           - bazzite-gnome-nvidia
           - bazzite-gnome-nvidia-open
+          - bazzite-cosmic
+          - bazzite-cosmic-nvidia
+          - bazzite-cosmic-nvidia-open
           - bazzite-deck
           - bazzite-deck-gnome
+          - bazzite-deck-cosmic
           - bazzite-ally
           - bazzite-ally-gnome
+          - bazzite-ally-cosmic
           - bazzite-asus
           - bazzite-gnome-asus
+          - bazzite-cosmic-asus
           - bazzite-asus-nvidia
           - bazzite-gnome-asus-nvidia
+          - bazzite-cosmic-asus-nvidia
           - bazzite-asus-nvidia-open
           - bazzite-gnome-asus-nvidia-open
+          - bazzite-cosmic-asus-nvidia-open
           - bazzite-surface
           - bazzite-gnome-surface
+          - bazzite-cosmic-surface
           - bazzite-surface-nvidia-open
           - bazzite-gnome-surface-nvidia-open
+          - bazzite-cosmic-surface-nvidia-open
           - bazzite-deck-nvidia
           - bazzite-deck-nvidia-gnome
         major_version: [42]
@@ -78,6 +88,8 @@ jobs:
 
           if [[ "${{ matrix.image_name }}" =~ "gnome" ]]; then
             FLATPAK_DIR_SHORTNAME="installer/gnome_flatpaks"
+          elif [[ "${{ matrix.image_name }}" =~ "cosmic" ]]; then
+            FLATPAK_DIR_SHORTNAME="installer/cosmic_flatpaks"
           fi
 
           echo "flatpak-dir-shortname=${FLATPAK_DIR_SHORTNAME}" >> $GITHUB_OUTPUT

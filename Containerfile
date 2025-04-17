@@ -437,7 +437,7 @@ RUN --mount=type=cache,dst=/var/cache \
         sed -i 's/^Exec=plasma-discover/& --backends flatpak-backend/' /usr/share/applications/org.kde.discover.desktop && \
         cp /usr/share/applications/org.gnome.Ptyxis.desktop /usr/share/kglobalaccel/org.gnome.Ptyxis.desktop && \
         setcap 'cap_net_raw+ep' /usr/libexec/ksysguard/ksgrd_network_helper \
-    ; else \
+    ; elif grep -q "silverblue" <<< "${BASE_IMAGE_NAME}"; then \
         dnf5 -y swap \
         --repo terra-extras \
             gnome-shell gnome-shell && \
@@ -482,6 +482,9 @@ RUN --mount=type=cache,dst=/var/cache \
         unzip /tmp/tilingshell/tilingshell@ferrarodomenico.com.zip -d /usr/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com && \
         curl -Lo /usr/share/thumbnailers/exe-thumbnailer.thumbnailer https://raw.githubusercontent.com/jlu5/icoextract/master/exe-thumbnailer.thumbnailer && \
         systemctl enable dconf-update.service \
+    ; else \
+        dnf5 -y install \
+            steamdeck-backgrounds \
     ; fi && \
     /ctx/cleanup
 
@@ -675,7 +678,7 @@ RUN --mount=type=cache,dst=/var/cache \
     dnf5 -y copr enable ycollet/audinux && \
     /ctx/cleanup
 
-# Configure KDE & GNOME
+# Configure KDE, GNOME & COSMIC
 RUN --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=bind,from=ctx,source=/,target=/ctx \
@@ -687,13 +690,16 @@ RUN --mount=type=cache,dst=/var/cache \
             steamdeck-kde-presets-desktop && \
        dnf5 -y install \
             steamdeck-kde-presets \
-    ; else \
+    ; elif grep -q "silverblue" <<< "${BASE_IMAGE_NAME}"; then \
         dnf5 -y install \
             steamdeck-gnome-presets \
             gnome-shell-extension-caribou-blocker \
             sddm && \
         dnf5 -y remove \
             malcontent-control && \
+    ; else \
+        dnf5 -y install \
+            sddm \
     ; fi && \
     /ctx/cleanup
 
@@ -799,6 +805,9 @@ RUN --mount=type=cache,dst=/var/cache \
     done && unset -v copr && \
     if grep -q "silverblue" <<< "${BASE_IMAGE_NAME}"; then \
         systemctl disable gdm.service && \
+        systemctl enable sddm.service \
+    elif grep -q "cosmic-atomic" <<< "${BASE_IMAGE_NAME}"; then \
+        systemctl disable cosmic-greeter.service && \
         systemctl enable sddm.service \
     ; fi && \
     if grep -q "silverblue" <<< "${BASE_IMAGE_NAME}"; then \

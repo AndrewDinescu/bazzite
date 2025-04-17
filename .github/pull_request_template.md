@@ -11,6 +11,7 @@ In this project we follow [Semantic PRs][1] and [Conventional Commits][2] to des
     feat(deck): enable this deck specific feature
     fix(ally): fix screen rotation on the ally
     feat(gnome): Stuff that is GNOME specific
+    feat(cosmic): Stuff that is COSMIC specific
 
 If you're unsure a generic `feat:` or `fix:` is fine! Did you already use this? Awesome, thanks again! Not sure what this all means? Here are some [more examples][3].
 

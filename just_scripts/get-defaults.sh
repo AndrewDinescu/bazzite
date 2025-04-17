@@ -13,8 +13,10 @@ fi
 
 valid_images=(
     silverblue
+    cosmic-atomic
     kinoite
     gnome
+    cosmic
     kde
 )
 image=${image,,}
@@ -37,6 +39,8 @@ fi
 desktop=""
 if [[ ${image} == "gnome" || ${image} == "silverblue" ]]; then
     desktop="-gnome"
+elif [[ ${image} == "cosmic" || ${image} == "cosmic-atomic" ]]; then
+    desktop="-cosmic"
 fi
 image="${target}${desktop}"
 if [[ ${image} =~ "nvidia" ]]; then

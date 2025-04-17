@@ -47,6 +47,8 @@ sudoif rm -f "${project_root}/just_scripts/output/${tag}-${git_branch}.iso-CHECK
 # Set Base Image
 if [[ ${image} =~ "gnome" ]]; then
     base_image="silverblue"
+elif [[ ${image} =~ "cosmic-atomic" ]]; then
+    base_image="cosmic-atomic"
 else
     base_image="kinoite"
 fi
@@ -56,6 +58,8 @@ if [[ "${base_image}" =~ "silverblue" ]]; then
     flatpak_dir_shortname="installer/gnome_flatpaks"
 elif [[ "${base_image}" =~ "kinoite" ]]; then
     flatpak_dir_shortname="installer/kde_flatpaks"
+elif [[ "${base_image}" =~ "cosmic-atomic" ]]; then
+    flatpak_dir_shortname="installer/cosmic_flatpaks"
 else
     exit 1
 fi

@@ -10,7 +10,7 @@ REGISTRY = "docker://ghcr.io/ublue-os/"
 
 IMAGE_MATRIX = {
     "base": ["desktop", "deck", "nvidia-closed", "nvidia-open"],
-    "de": ["kde", "gnome"],
+    "de": ["kde", "gnome", "cosmic"],
     "image_flavor": ["main", "asus", "surface"],
 }
 
@@ -31,6 +31,7 @@ OTHER_NAMES = {
     "deck": "### Deck Images\n| | Name | Previous | New |\n| --- | --- | --- | --- |{changes}\n\n",
     "kde": "### KDE Images\n| | Name | Previous | New |\n| --- | --- | --- | --- |{changes}\n\n",
     "gnome": "### Gnome Images\n| | Name | Previous | New |\n| --- | --- | --- | --- |{changes}\n\n",
+    "cosmic": "### COSMIC Images\n| | Name | Previous | New |\n| --- | --- | --- | --- |{changes}\n\n",
     "nvidia": "### Nvidia Images\n| | Name | Previous | New |\n| --- | --- | --- | --- |{changes}\n\n",
     "asus": "### Asus Images\n| | Name | Previous | New |\n| --- | --- | --- | --- |{changes}\n\n",
     "surface": "### Surface Images\n| | Name | Previous | New |\n| --- | --- | --- | --- |{changes}\n\n",
@@ -53,6 +54,7 @@ From previous `{target}` version `{prev}` there have been the following changes.
 | **Mesa** | {pkgrel:mesa-filesystem} |
 | **Gamescope** | {pkgrel:gamescope} |
 | **Gnome** | {pkgrel:gnome-control-center-filesystem} |
+| **COSMIC** | {pkgrel:cosmic-session} |
 | **KDE** | {pkgrel:plasma-desktop} |
 | **[HHD](https://github.com/hhd-dev/hhd)** | {pkgrel:hhd} |
 
@@ -91,6 +93,9 @@ def get_images():
 
         if de == "gnome":
             img += "-gnome"
+
+        if de == "cosmic":
+            img += "-cosmic"
 
         if base != "deck" and image_flavor == "asus":
             img += "-asus"
@@ -212,6 +217,8 @@ def get_package_groups(prev: dict[str, Any], manifests: dict[str, Any]):
             if t == "kde" and de != "kde":
                 continue
             if t == "gnome" and de != "gnome":
+                continue
+            if t == "cosmic" and de != "cosmic":
                 continue
             if t == "deck" and base != "deck":
                 continue

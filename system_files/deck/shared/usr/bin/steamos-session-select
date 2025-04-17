@@ -55,6 +55,8 @@ case "$session" in
       session_launcher="plasma.desktop"
     elif [[ ${BASE_IMAGE_NAME} == 'silverblue' ]]; then
       session_launcher="gnome-wayland.desktop"
+    elif [[ ${BASE_IMAGE_NAME} == 'cosmic-atomic' ]]; then
+      session_launcher="cosmic.desktop"
     fi
   ;;
   plasma-x11-persistent)
@@ -62,6 +64,9 @@ case "$session" in
       session_launcher="plasmax11.desktop"
     elif [[ ${BASE_IMAGE_NAME} == 'silverblue' ]]; then
       session_launcher="gnome-xorg.desktop"
+    elif [[ ${BASE_IMAGE_NAME} == 'cosmic-atomic' ]]; then
+      echo "COSMIC does not support X11"
+      exit 1
     fi
   ;;
   desktop|plasma)
@@ -69,6 +74,8 @@ case "$session" in
       session_launcher="plasma-steamos-wayland-oneshot.desktop"
     elif [[ ${BASE_IMAGE_NAME} == 'silverblue' ]]; then
       session_launcher="gnome-wayland-oneshot.desktop"
+    elif [[ ${BASE_IMAGE_NAME} == 'cosmic-atomic' ]]; then
+      session_launcher="cosmic-oneshot.desktop"
     fi
     create_sentinel=1
   ;;

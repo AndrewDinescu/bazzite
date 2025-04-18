@@ -40,6 +40,13 @@ function check_sentinel()
   return 0
 }
 
+board_name=$(cat /sys/class/dmi/id/board_name)
+if [[ "$board_name" == "Jupiter" || "$board_name" == "Galileo" ]] then
+    icons="${XDG_DATA_HOME:-$HOME/.local/share}/icons/hicolor/scalable/actions"
+    mkdir -p $icons
+    ln -s /usr/share/icons/hicolor/scalable/actions/steamdeck-gaming-return.svg $icons/gaming-return.svg
+fi
+
 if CONFIGURED_CHAINED_SESSION=$(check_sentinel); then
   # We found and consumed the oneshot sentinel, proceed to launch cosmic
   echo >&2 "$0: Found and removed sentinel file for one-shot desktop, proceeding to launch"

@@ -65,8 +65,9 @@ case "$session" in
     elif [[ ${BASE_IMAGE_NAME} == 'silverblue' ]]; then
       session_launcher="gnome-xorg.desktop"
     elif [[ ${BASE_IMAGE_NAME} == 'cosmic-atomic' ]]; then
-      echo "COSMIC does not support X11"
-      exit 1
+      # COSMIC only supports wayland, use anyway (maybe change later?)
+      session_launcher="cosmic.desktop"
+      # exit 1
     fi
   ;;
   desktop|plasma)

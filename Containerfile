@@ -702,7 +702,7 @@ RUN --mount=type=cache,dst=/var/cache \
             gnome-shell-extension-caribou-blocker \
             sddm && \
         dnf5 -y remove \
-            malcontent-control && \
+            malcontent-control \
     ; else \
         dnf5 -y install \
             sddm \
